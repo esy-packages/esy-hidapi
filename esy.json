@@ -1,26 +1,19 @@
 {
-  "//": "Keys that start with // are ignored",
-  "name": "esy-hello",
-  "version": "0.0.1000",
-  "// version": "See readme and docs on how to version packages",
-  "description": "hello packaged for esy",
-  "source": "https://github.com/esy/test-hello-c/archive/0.1.0.zip#sha256:e1bd9924eb5d97d99c9b87f9a4a95b734e111cd6dd01464358029c751d57d693",
+  "name": "esy-hidapi",
+  "version": "0.10.1",
+  "description": "A Simple library for communicating with USB and Bluetooth HID devices on Linux, Mac, and Windows",
+  "source": "https://github.com/libusb/hidapi/archive/refs/tags/hidapi-0.10.1.tar.gz#sha256:f71dd8a1f46979c17ee521bc2117573872bbf040f8a4750e492271fc141f2644",
   "override": {
-    "buildEnv": {
-      "//": "Only for illustrative purpose. Not a real, useful package",
-      "PREFIX": "$cur__install",
-      "CC_PREFIX": "#{os == 'windows' ? 'x86_64-w64-mingw32-': '' }"
-    },
-    "build": ["./configure", "make"],
+    "build": [
+      ["./bootstrap"],
+      [
+        "./configure",
+        "--prefix=#{self.install}",
+        "#{os == 'windows' ? '--host x86_64-w64-mingw32' : ''}"
+      ],
+      "make"
+    ],
     "install": "make install",
-    "buildsInSource": true,
-    "exportedEnv": {
-      "//": "This is just an example",
-      "PKG_CONFIG_PATH": {
-        "val": "#{self.lib / 'pkgconfig'}",
-        "scope": "global"
-      }
-    },
-    "dependencies": {}
+    "buildsInSource": true
   }
 }

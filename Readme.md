@@ -6,6 +6,7 @@ package](https://github.com/ManasJayanth/esy-packages-template/workflows/Build%2
 `esy-hello` is sample package, [`hello`](https://github.com/esy/test-hello-c), packaged for [`esy`](https://esy.sh/).
 
 ## Why
+
 `esy` can not only fetch and install Reason and OCaml libraries and tools,
 but also those written in C. This extends reproducibility benefits to
 packages written in C, like `skia`, `libffi`, `pkg-config`
@@ -17,7 +18,7 @@ they have installed the correct version. Read more at the docs about
 
 `esy-hello` can be used from both NPM and directly from Github.
 
-### From NPM 
+### From NPM
 
 `esy-hello` is deployed on NPM can be found
 [here](https://www.npmjs.com/package/TODO).
@@ -98,19 +99,13 @@ the `esy.json` and install steps in `esy.install`. Example,
 ```json
 {
   "esy": {
-    "build": [
-	  "./configure",
-	  "make"
-	],
-	"install": [
-	  "make install"
-	]
+    "build": ["./configure", "make"],
+    "install": ["make install"]
   }
 }
 ```
 
-
-## Testing and making sure the package works as expected 
+## Testing and making sure the package works as expected
 
 To test if the package works, we recommend an end-to-end test by
 publishing it to local
@@ -120,7 +115,7 @@ package with a `package.json` or `esy.json` depends on it.
 ```json
 {
   "dependencies": {
-    esy-hello": "*"
+    "esy-hello": "*"
   }
 }
 ```
