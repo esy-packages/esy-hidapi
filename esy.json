@@ -5,15 +5,28 @@
   "source": "https://github.com/libusb/hidapi/archive/refs/tags/hidapi-0.10.1.tar.gz#sha256:f71dd8a1f46979c17ee521bc2117573872bbf040f8a4750e492271fc141f2644",
   "override": {
     "build": [
-      ["./bootstrap"],
+      "libtoolize",
+      "autoreconf --install --verbose --force",
       [
         "./configure",
         "--prefix=#{self.install}",
-        "#{os == 'windows' ? '--host x86_64-w64-mingw32' : ''}"
+        "#{os == 'windows' ? '--host=x86_64-w64-mingw32' : ''}",
+        "--disable-dependency-tracking"
       ],
       "make"
     ],
+    "exportedEnv": {
+      "PKG_CONFIG_PATH": {
+        "scope": "global",
+        "val": "#{$PKG_CONFIG_PATH : self.lib / 'pkgconfig'}"
+      }
+    },
     "install": "make install",
-    "buildsInSource": true
+    "buildsInSource": true,
+    "dependencies": {
+      "autoconf": "esy-packages/esy-autoconf:package.json#fb93edf57b0adc4b27b34a57a562395b224002d3",
+      "automake": "esy-packages/esy-automake:package.json#e959059ccc1560a1565b16fb63ed7052c663fca0",
+      "libtool": "esy-packages/esy-libtools:package.json#0fe768722d345533f86df32f4de3b6a374160e2e"
+    }
   }
 }
